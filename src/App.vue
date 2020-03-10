@@ -12,6 +12,9 @@ export default {
 	name: 'App',
 	components: {
 		TheLayout
+	},
+	mounted() {
+		console.log(this.$store)
 	}
 }
 </script>

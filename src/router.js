@@ -7,7 +7,8 @@ const routes = [
 		component: Home
 	},
 	{
-		path: '/catalog',
+		path: '/catalog/:id',
+		name: 'category',
 		component: () => import('./pages/Category.vue')
 	}
 ]

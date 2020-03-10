@@ -26,7 +26,7 @@ const products = [
 	}
 ]
 
-export default new Array(4)
+module.exports = new Array(4)
 	.fill(null)
 	.map(() => products)
 	.flat()

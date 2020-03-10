@@ -1,18 +1,18 @@
 [
 	{
 		"title": "Кружки",
-		"path": "/krijka"
+		"path": "krujki"
 	},
 	{
 		"title": "Носки",
-		"path": "/noski"
+		"path": "noski"
 	},
 	{
 		"title": "Лопатки",
-		"path": "/lopatki"
+		"path": "lopatki"
 	},
 	{
 		"title": "Самокаты",
-		"path": "/samokati"
+		"path": "samokati"
 	}
 ]

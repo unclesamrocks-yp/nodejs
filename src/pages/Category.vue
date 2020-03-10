@@ -8,17 +8,33 @@
 </template>
 
 <script>
-import cups from '../assets/json/cups.js'
 import ProductCard from '../components/AppProductCard.vue'
+import CategoryStore from '../store/Category.js'
+
+import { mapActions, mapState } from 'vuex'
 
 export default {
+	created() {
+		const { id } = this.$route.params
+		this.fetchAboutCategory(id)
+	},
+	// beforeRouteEnter(to, from, next) {
+	// 	const {
+	// 		params: { id }
+	// 	} = to
+	// 	this.fetchAboutCategory(id).then(next)
+	// },
 	components: {
 		ProductCard
 	},
 	data() {
-		return {
-			items: cups
-		}
+		return {}
+	},
+	computed: {
+		// ...mapState('catigories', ['items'])
+	},
+	methods: {
+		// ...mapActions('catigories', ['fetchAboutCategory'])
 	}
 }
 </script>

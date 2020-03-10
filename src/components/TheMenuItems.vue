@@ -1,7 +1,7 @@
 <template>
 	<ul class="TheMenuItems">
 		<li class="TheMenuItems__listItem" v-for="item in items" :key="item.path">
-			<router-link class="TheMenuItems__link" :to="item.path">
+			<router-link class="TheMenuItems__link" :to="{ name: 'category', params: { id: item.path } }">
 				{{ item.title }}
 			</router-link>
 		</li>
