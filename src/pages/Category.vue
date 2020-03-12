@@ -11,10 +11,10 @@
 					Товаров в категории нет
 				</div>
 				<template v-else>
-					<ProductCard v-for="item in items" :key="item.title" v-bind="item" />
+					<ProductCard v-for="item in items" :key="item.id" v-bind="item" />
 				</template>
 			</div>
-			<div>{{ page + 1 }}/{{ Math.ceil(allItemsLength/itemsOnPage) }}</div>
+			<div>{{ page + 1 }}/{{ Math.ceil(allItemsLength / itemsOnPage) }}</div>
 		</template>
 	</div>
 </template>
@@ -26,7 +26,7 @@ import CategoryStore from '../store/Category.js'
 import { mapActions, mapState } from 'vuex'
 
 export default {
-	created(){
+	created() {
 		this.$store.registerModule('categories', CategoryStore)
 	},
 	beforeRouteEnter(to, from, next) {
@@ -35,10 +35,7 @@ export default {
 		} = to
 
 		next(vm => {
-			return Promise.all([
-				vm.fetchAboutCategory(id),
-				vm.fetchData(id)
-			])
+			return Promise.all([vm.fetchAboutCategory(id), vm.fetchData(id)])
 		})
 	},
 	components: {
@@ -48,15 +45,7 @@ export default {
 		return {}
 	},
 	computed: {
-		...mapState('categories', [
-			'isLoading',
-			'title',
-			'items',
-			'page',
-			'itemsOnPage',
-			'allItemsLength',
-			'error'
-		])
+		...mapState('categories', ['isLoading', 'title', 'items', 'page', 'itemsOnPage', 'allItemsLength', 'error'])
 	},
 	methods: {
 		...mapActions('categories', ['fetchAboutCategory', 'fetchData'])
@@ -65,7 +54,7 @@ export default {
 		'$route.params.id'(val) {
 			this.fetchAboutCategory(val)
 			this.fetchData(val, this.page)
-		},
+		}
 		// 'page'(val){
 		// 	this.fetchData(val, this.page)
 		// }

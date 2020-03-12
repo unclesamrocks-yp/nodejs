@@ -1,4 +1,4 @@
-const products = [
+const products = () => [
 	{
 		title: 'Кружка с принтом',
 		img: {
@@ -28,5 +28,6 @@ const products = [
 
 module.exports = new Array(4)
 	.fill(null)
-	.map(() => products)
+	.map(() => products())
 	.flat()
+	.map(item => ((item.id = Date.now().toString() + ~~(Math.random() * 100000)), item))

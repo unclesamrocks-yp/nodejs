@@ -1,9 +1,12 @@
 import Vuex from 'vuex'
 
-// import category from './Category'
+import cart from './cart'
 
 export default () => {
 	return new Vuex.Store({
+		modules: {
+			cart
+		},
 		state: {},
 		mutations: {}
 	})

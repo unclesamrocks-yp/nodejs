@@ -7,16 +7,32 @@
 			<span>{{ price.base }}</span>
 			<span v-if="price.old">{{ price.old }}</span>
 		</div>
+		<button v-if="has" @click="remove(id)">Удалить</button>
+		<button v-else @click="add(id)">В корзину</button>
 	</div>
 </template>
 
 <script>
+import { mapState, mapMutations, mapActions } from 'vuex'
 export default {
 	props: {
+		id: String,
 		img: Object,
 		title: String,
 		description: String,
 		price: Number
+	},
+	methods: {
+		...mapActions('cart', ['add', 'remove'])
+	},
+	computed: {
+		...mapState('cart', ['items']),
+		has() {
+			debugger
+			return this.items.find(itemF => {
+				return itemF === this.id
+			})
+		}
 	}
 }
 </script>
