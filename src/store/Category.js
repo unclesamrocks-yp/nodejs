@@ -12,6 +12,7 @@ export default {
 	mutations: {
 		setProducts(state, items = []) {
 			state.items = items
+			state.isLoading = false
 		},
 		setTitle(state, title = '') {
 			state.title = title
@@ -34,7 +35,6 @@ export default {
 		fetchAboutCategory(ctx, category) {
 			const { commit } = ctx
 
-			commit('setLoading', true)
 			return fetch(`/api/about-category/${category}`)
 				.then(res => {
 					if (res.ok) {
@@ -43,7 +43,6 @@ export default {
 					throw new Error('Ответ не 200: ' + res.status)
 				})
 				.then(data => {
-					commit('setLoading', false)
 					const { title, itemsOnPage, allItemsLength } = data
 
 					commit('setTitle', title)
@@ -57,11 +56,11 @@ export default {
 					commit('setError', err)
 				})
 		},
-		fetchData(ctx, category) {
+		fetchData(ctx, category, page) {
 			const { commit } = ctx
 
 			commit('setLoading', true)
-			return fetch(`/api/products/${category}`)
+			return fetch(`/api/products/${category}?items-on-page=${this.itemsOnPage}${page ? `&page=${page}`: ''}`)
 				.then(res => {
 					if (res.ok) {
 						return res.json()

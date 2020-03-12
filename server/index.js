@@ -1,10 +1,9 @@
 import express from 'express'
+import api from './api/'
 
 const app = express()
 
-app.get('/api/qwe', (req, res) => {
-	res.send('qwe')
-})
+app.use(api)
 
 app.listen(3000, () => {
 	console.log('Сервер запущен на порту 3000')
