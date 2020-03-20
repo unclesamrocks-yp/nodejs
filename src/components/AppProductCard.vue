@@ -16,11 +16,11 @@
 import { mapState, mapMutations, mapActions } from 'vuex'
 export default {
 	props: {
-		id: String,
+		_id: String,
 		img: Object,
 		title: String,
 		description: String,
-		price: Number
+		price: Object
 	},
 	methods: {
 		...mapActions('cart', ['add', 'remove'])
@@ -28,10 +28,12 @@ export default {
 	computed: {
 		...mapState('cart', ['items']),
 		has() {
-			debugger
 			return this.items.find(itemF => {
 				return itemF === this.id
 			})
+		},
+		id(){
+			return this._id
 		}
 	}
 }

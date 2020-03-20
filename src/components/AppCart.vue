@@ -1,6 +1,6 @@
 <template>
 	<div>
-		<span v-if="items.length">{{ items.length }}</span>
+		<span v-if="items.length">{{ items.length }} <span @click="removeAll">X</span></span>
 		<span v-else>Товаров в корзине нет</span>
 	</div>
 </template>
@@ -18,7 +18,7 @@ export default {
 		}
 	},
 	methods: {
-		...mapActions('cart', ['getItems'])
+		...mapActions('cart', ['getItems', 'removeAll'])
 	},
 	mounted() {
 		console.log(this.items)

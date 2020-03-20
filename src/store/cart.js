@@ -21,6 +21,9 @@ export default {
 
 			return state.items.splice(index, 1)
 		},
+		removeAll(state){
+			state.items = []
+		},
 		has(state, item) {
 			return state.items.find(itemF => {
 				return itemF === item
@@ -31,7 +34,9 @@ export default {
 		getItems(ctx) {
 			const { commit } = ctx
 
-			fetch('/api/cart/products')
+			fetch('/api/cart/products', {
+				credentials: 'include'
+			})
 				.then(res => {
 					if (!res.ok) {
 						console.log(res)
@@ -49,6 +54,7 @@ export default {
 			commit('add', item)
 			fetch('/api/cart/add', {
 				method: 'POST',
+				credentials: 'include',
 				headers: {
 					'content-type': 'application/json'
 				},
@@ -74,6 +80,7 @@ export default {
 			commit('remove', item)
 			fetch('/api/cart/remove', {
 				method: 'POST',
+				credentials: 'include',
 				headers: {
 					'content-type': 'application/json'
 				},
@@ -91,6 +98,25 @@ export default {
 				})
 				.catch(err => {
 					commit('add', item)
+				})
+		},
+		removeAll(ctx){
+			const { commit } = ctx
+
+			fetch('/api/cart/remove-all', {
+				credentials: 'include'
+			})
+				.then(res => {
+					if (!res.ok) {
+						console.log(res)
+						throw new Error('Ответ не 200: ' + res.status)
+					}
+				})
+				.then(data => {
+					commit('removeAll')
+				})
+				.catch(err => {
+					alert('Удалить товары не удалось')
 				})
 		}
 	}

@@ -1,8 +1,11 @@
 import express from 'express'
 
+import { dbClient } from '../db.js'
+
 const router = express.Router()
 
-router.get('/products/:category', (req, res) => {
+router.get('/products/:category', async (req, res) => {
+  
   const {
     params: {
       category
@@ -12,15 +15,28 @@ router.get('/products/:category', (req, res) => {
       'items-on-page': itemsOnPage
     }
   } = req
+  
+  const client = await dbClient
+  const shop = client.db('shop')
+  const categories = shop.collection('categories')
+  const products = shop.collection('products')
 
-  console.log(itemsOnPage)
-  res.json(products[category] || [])
+
+  const categoryInDB = await categories.findOne({
+    latin: category
+  })
+
+  const {
+    _id
+  } = categoryInDB
+
+  const productsInDb = await products.find({
+    categoryId: _id.toString()
+  })
+    .toArray()
+
+
+  res.json(productsInDb)
 })
-
-const cups = require('../../src/assets/json/cups')
-
-const products = {
-	krujki: cups
-}
 
 export default router
