@@ -10,6 +10,26 @@ const routes = [
 		path: '/catalog/:id',
 		name: 'category',
 		component: () => import('./pages/Category.vue')
+	},
+	{
+		path: '/admin/',
+		name: 'admin',
+		component: () => import('./pages/Admin.vue'),
+		redirect: {
+			name: 'admin-products'
+		},
+		children: [
+			{
+				path: 'categories',
+				name: 'admin-categories',
+				component: () => import('./pages/AdminCategories.vue'),
+			},
+			{
+				path: 'products',
+				name: 'admin-products',
+				component: () => import('./pages/AdminProducts.vue'),
+			}
+		]
 	}
 ]
 

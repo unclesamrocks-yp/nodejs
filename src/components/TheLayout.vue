@@ -11,10 +11,19 @@
 <script>
 import TheHeader from '../components/TheHeader.vue'
 import TheMenu from '../components/TheMenu.vue'
+
+import { mapActions } from 'vuex'
+
 export default {
+	created(){
+		this.getCategories()
+	},
 	components: {
 		TheHeader,
 		TheMenu
+	},
+	methods: {
+		...mapActions(['getCategories'])
 	}
 }
 </script>

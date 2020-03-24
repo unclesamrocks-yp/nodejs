@@ -26,6 +26,10 @@ router.get('/products/:category', async (req, res) => {
     latin: category
   })
 
+  if (!categoryInDB) {
+    res.status(200).json([])
+  }
+
   const {
     _id
   } = categoryInDB

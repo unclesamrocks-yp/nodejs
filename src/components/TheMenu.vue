@@ -3,15 +3,21 @@
 		<router-link to="/" class="TheMenu__logo-container">
 			<img src="../assets/logo.png" />
 		</router-link>
-		<TheMenuItems />
+		<TheMenuItems :categories="categories"/>
 	</nav>
 </template>
 
 <script>
+import { mapState } from 'vuex'
+
 import TheMenuItems from './TheMenuItems.vue'
+
 export default {
 	components: {
 		TheMenuItems
+	},
+	computed: {
+		...mapState(['categories'])
 	}
 }
 </script>
