@@ -14,7 +14,7 @@
 		"connect-mongo": "^3.2.0",
 		"core-js": "^3.6.4",
 		"esm": "^3.2.25",
-		"express": "^4.17.1",
+		"express": "^4.17.3",
 		"express-session": "^1.17.0",
 		"mongodb": "^3.5.5",
 		"vue": "^2.6.11",
